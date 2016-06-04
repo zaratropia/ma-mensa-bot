@@ -18,7 +18,7 @@ class BotWorker
       end
     end
 
-    def get_meal_content_from_api
+    def self.get_meal_content_from_api
       api_helper = OpenMensa::Api.new
 
       @data = JSON.parse api_helper.meal_list
