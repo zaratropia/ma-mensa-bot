@@ -15,13 +15,14 @@ module OpenMensa
     end
 
     def meal_list
-      @data = JSON.parse self.class.get("/canteens/#{@id}/days/#{current_mensa_date}/meals")
-
-      if @data.code = "404"
+      @data = self.class.get("/canteens/#{@id}/days/#{current_mensa_date}/meals")
+      puts @data.code
+      if @data.code == 404
         message = "Für heute sind leider (noch) keine Daten verfübgar."
       else
-        message = @data.body
+        message = JSON.parse @data.body
       end
+      puts message
       message
     end
 
