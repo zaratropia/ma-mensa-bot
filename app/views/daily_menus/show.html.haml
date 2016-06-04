@@ -1,0 +1,10 @@
+%p#notice= notice
+%p
+  %strong Body:
+  = @daily_menu.body
+%p
+  %strong Message:
+  = @daily_menu.message
+= link_to 'Edit', edit_daily_menu_path(@daily_menu)
+|
+= link_to 'Back', daily_menus_path

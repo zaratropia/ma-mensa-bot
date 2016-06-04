@@ -1,0 +1,18 @@
+%p#notice= notice
+%h1 Listing Daily Menus
+%table
+  %thead
+    %tr
+      %th Body
+      %th Message
+      %th{:colspan => "3"}
+  %tbody
+    - @daily_menus.each do |daily_menu|
+      %tr
+        %td= daily_menu.body
+        %td= daily_menu.message
+        %td= link_to 'Show', daily_menu
+        %td= link_to 'Edit', edit_daily_menu_path(daily_menu)
+        %td= link_to 'Destroy', daily_menu, method: :delete, data: { confirm: 'Are you sure?' }
+%br/
+= link_to 'New Daily menu', new_daily_menu_path
