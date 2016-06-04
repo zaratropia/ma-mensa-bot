@@ -6,6 +6,8 @@ class BotWorker
     token = '228539999:AAFBC-Ea2hC9E2OdFED02p6_8HOw_J0HxHw'
 
     Telegram::Bot::Client.run(token) do |bot|
+      api_helper = OpenMensa::Api.new
+
       bot.listen do |message|
         case message.text
         when '/start'
@@ -13,21 +15,9 @@ class BotWorker
         when '/stop'
           bot.api.send_message(chat_id: message.chat.id, text: "Bye, #{message.from.first_name}")
         when '/essen'
-          bot.api.send_message(chat_id: message.chat.id, text: get_meal_content_from_api)
+          bot.api.send_message(chat_id: message.chat.id, text: api_helper.meal_list)
         end
       end
-    end
-
-    def self.get_meal_content_from_api
-      api_helper = OpenMensa::Api.new
-
-      @data = JSON.parse api_helper.meal_list
-      if @data.code = "404"
-        message = "Für heute sind leider (noch) keine Daten verfübgar."
-      else
-        message = @data.body
-      end
-      message
     end
   end
 end

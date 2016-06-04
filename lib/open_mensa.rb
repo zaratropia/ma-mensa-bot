@@ -15,9 +15,14 @@ module OpenMensa
     end
 
     def meal_list
-      menu_date = get_current_mensa_date
-      puts menu_date
-      self.class.get("/canteens/#{@id}/days/#{menu_date}/meals")
+      @data = JSON.parse self.class.get("/canteens/#{@id}/days/#{current_mensa_date}/meals")
+
+      if @data.code = "404"
+        message = "Für heute sind leider (noch) keine Daten verfübgar."
+      else
+        message = @data.body
+      end
+      message
     end
 
     def canteens
@@ -26,7 +31,7 @@ module OpenMensa
 
     private
 
-    def get_current_mensa_date
+    def current_mensa_date
       if Date.today.wday == 6
         menu_date = 2.days.from_now.strftime('%Y-%m-%d')
       elsif Date.today.wday == 0
