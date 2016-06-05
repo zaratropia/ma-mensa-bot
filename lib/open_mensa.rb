@@ -22,8 +22,7 @@ module OpenMensa
       else
         message = JSON.parse @data.body
       end
-      puts message
-      message
+      format_message(message)
     end
 
     def canteens
@@ -41,6 +40,14 @@ module OpenMensa
         menu_date = Date.today.strftime('%Y-%m-%d')
       end
       menu_date
+    end
+
+    def format_message(hash)
+      message = ""
+      hash.each do |h|
+        message << "<pre>#{h['name']}</pre>"
+      end
+      message
     end
 
   end

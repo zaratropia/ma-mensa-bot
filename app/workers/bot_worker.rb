@@ -15,7 +15,7 @@ class BotWorker
         when '/stop'
           bot.api.send_message(chat_id: message.chat.id, text: "Bye, #{message.from.first_name}")
         when '/essen'
-          bot.api.send_message(chat_id: message.chat.id, text: api_helper.meal_list)
+          bot.api.send_message(chat_id: message.chat.id, text: api_helper.meal_list, parse_mode: 'HTML')
         end
       end
     end
