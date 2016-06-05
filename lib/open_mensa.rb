@@ -44,6 +44,7 @@ module OpenMensa
 
     def format_message(hash)
       message = ""
+      message << "<a href='https://www.stw-ma.de/Essen+_+Trinken/Mensen+_+Cafeterien/Mensa+Hochschule+Mannheim.html'>Mensa Hochschule Manheim</a>"
       hash.each do |h|
         message << "<b>#{h['notes']}</b>"
         message << "<pre>#{h['name']}</pre>"
