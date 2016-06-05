@@ -45,6 +45,7 @@ module OpenMensa
     def format_message(hash)
       message = ""
       hash.each do |h|
+        message << "<b>#{h['notes']}</b>"
         message << "<pre>#{h['name']}</pre>"
       end
       message
