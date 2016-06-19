@@ -18,11 +18,11 @@ module OpenMensa
       @data = self.class.get("/canteens/#{@id}/days/#{current_mensa_date}/meals")
 
       if @data.code == 404
-        message = "Für heute sind leider (noch) keine Daten verfübgar."
+        message = "Aktuell sind leider (noch) keine Daten verfübgar."
       else
-        message = JSON.parse @data.body
+        message = format_message JSON.parse(@data.body)
       end
-      format_message(message)
+      message
     end
 
     def meal_veggie
@@ -31,9 +31,9 @@ module OpenMensa
       if @data.code == 404
         message = "Für heute sind leider (noch) keine Daten verfübgar."
       else
-        message = JSON.parse @data.body
+        message = format_message JSON.parse(@data.body)
       end
-      format_message(message) # TODO extract veggie hash
+      message # TODO extract veggie hash
     end
 
     def canteens
