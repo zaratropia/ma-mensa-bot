@@ -16,13 +16,24 @@ module OpenMensa
 
     def meal_list
       @data = self.class.get("/canteens/#{@id}/days/#{current_mensa_date}/meals")
-      puts @data.code
+
       if @data.code == 404
         message = "Für heute sind leider (noch) keine Daten verfübgar."
       else
         message = JSON.parse @data.body
       end
       format_message(message)
+    end
+
+    def meal_veggie
+      @data = self.class.get("/canteens/#{@id}/days/#{current_mensa_date}/meals")
+
+      if @data.code == 404
+        message = "Für heute sind leider (noch) keine Daten verfübgar."
+      else
+        message = JSON.parse @data.body
+      end
+      format_message(message) # TODO extract veggie hash
     end
 
     def canteens
@@ -44,10 +55,11 @@ module OpenMensa
 
     def format_message(hash)
       message = ""
-      message << "<a href='https://www.stw-ma.de/Essen+_+Trinken/Mensen+_+Cafeterien/Mensa+Hochschule+Mannheim.html'>Mensa Hochschule Manheim</a>"
+      message << "[Mensa Hochschule Manheim](https://www.stw-ma.de/Essen+_+Trinken/Mensen+_+Cafeterien/Mensa+Hochschule+Mannheim.html)"
+      message << "```#{current_mensa_date}```"
       hash.each do |h|
-        message << "<b>#{h['notes']}</b>"
-        message << "<pre>#{h['name']}</pre>"
+        message << "*#{h['notes']}*"
+        message << "```#{h['name']}```"
       end
       message
     end

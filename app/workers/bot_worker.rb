@@ -10,12 +10,15 @@ class BotWorker
 
       bot.listen do |message|
         case message.text
-        when '/start'
-          bot.api.send_message(chat_id: message.chat.id, text: "Hello, #{message.from.first_name}")
-        when '/stop'
-          bot.api.send_message(chat_id: message.chat.id, text: "Bye, #{message.from.first_name}")
+        #when '/start'
+        #  bot.api.send_message(chat_id: message.chat.id, text: "Hello, #{message.from.first_name}")
+        #when '/stop'
+        #  bot.api.send_message(chat_id: message.chat.id, text: "Bye, #{message.from.first_name}")
         when '/essen'
           bot.api.send_message(chat_id: message.chat.id, text: api_helper.meal_list, parse_mode: 'HTML')
+        end
+      when '/veggie'
+          bot.api.send_message(chat_id: message.chat.id, text: api_helper.meal_veggie, parse_mode: 'HTML')
         end
       end
     end
