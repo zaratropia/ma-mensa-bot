@@ -55,13 +55,17 @@ module OpenMensa
 
     def format_message(hash)
       message = ""
-      message << "<a href='https://www.stw-ma.de/Essen+_+Trinken/Mensen+_+Cafeterien/Mensa+Hochschule+Mannheim.html'>Mensa Hochschule Manheim</a>"
-      message << "<i>#{current_mensa_date}</i>&#13;"
+      message << "<a href='https://www.stw-ma.de/Essen+_+Trinken/Mensen+_+Cafeterien/Mensa+Hochschule+Mannheim.html'>Mensa Hochschule Manheim</a>#{new_line}"
+      message << "#{current_mensa_date}#{new_line}"
       hash.each do |h|
-        message << "<b>#{h['notes']}</b>"
-        message << "<pre>#{h['name']}</pre>"
+        message << "<b>#{h['notes']}</b>#{new_line}"
+        message << "<pre>#{h['name']}</pre>#{new_line}"
       end
       message
+    end
+
+    def new_line
+      "&#13;&#10"
     end
 
   end
